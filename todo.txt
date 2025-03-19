@@ -1,0 +1,11 @@
+TO-DO List:
+1. create an HTTP Server to handle api requests
+2. call different apis to get price data
+3. ensure that these api calls are done concurrently
+    3a. use a worker pool to assign one worker per api call
+4. get the price data into a queue
+5. turn the queue into a t-distribution
+6. convert this into a 95% confidence interval
+7. return the confidence interval with the true price 
+8. put this data on-chain
+    8a. put the price into the transaction hash message
