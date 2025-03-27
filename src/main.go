@@ -1,11 +1,12 @@
-package Main
-package request_handler
+package main
 
 import (
-	"fmt"
+	
 )
 
 func main() {
-	request_handler.GetCMCPrice()
+	GetCMCPrice()
+	GetCoinbasePrice()
+	GetOKXPrice()
 }
 
