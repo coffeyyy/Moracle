@@ -97,3 +97,49 @@ func GetOKXPrice() {
 	respBody, _ := io.ReadAll(resp.Body)
 	fmt.Println(string(respBody))
 }
+
+func GetBitfinexPrice() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://api-pub.bitfinex.com/v2/ticker/tETHUSD", nil)
+	if err != nil {
+		log.Print(err)
+		os.Exit(1)
+	}
+	q := url.Values{}
+
+	req.Header.Set("Accepts", "application/json")
+	req.URL.RawQuery = q.Encode()
+
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println("Error sending request to server")
+		os.Exit(1)
+	}
+
+	fmt.Println(resp.Status)
+	respBody, _ := io.ReadAll(resp.Body)
+	fmt.Println(string(respBody))
+}
+
+func GetDeribitPrice() {
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://test.deribit.com/api/v2/public/get_order_book", nil)
+	if err != nil {
+		log.Print(err)
+		os.Exit(1)
+	}
+	q := url.Values{}
+	q.Add("depth", "1")
+	q.Add("instrument_name", "ETH-PERPETUAL")
+	req.URL.RawQuery = q.Encode()
+
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println("Error sending request to server")
+		os.Exit(1)
+	}
+
+	fmt.Println(resp.Status)
+	respBody, _ := io.ReadAll(resp.Body)
+	fmt.Println(string(respBody))
+}

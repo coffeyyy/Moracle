@@ -8,5 +8,7 @@ func main() {
 	GetCMCPrice()
 	GetCoinbasePrice()
 	GetOKXPrice()
+	GetBitfinexPrice()
+	GetDeribitPrice()
 }
 
