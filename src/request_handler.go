@@ -11,6 +11,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+
 func GetCMCPrice() {
 	err := godotenv.Load()
 	if err != nil {
@@ -74,22 +75,16 @@ func GetCoinbasePrice() {
 }
 
 func GetOKXPrice() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
-	coinbase_api_key := os.Getenv("COINBASE_API_KEY")
 	client := &http.Client{}
-	req, err := http.NewRequest("GET", "https://api.binance.com", nil)
+	req, err := http.NewRequest("GET", "https://www.okx.com/api/v5/public/price-limit", nil)
 	if err != nil {
 		log.Print(err)
 		os.Exit(1)
 	}
 	q := url.Values{}
+	q.Add("instId", "BTC-USDT-SWAP")
 
 	req.Header.Set("Accepts", "application/json")
-	req.Header.Add("Bearer", coinbase_api_key)
 	req.URL.RawQuery = q.Encode()
 
 	resp, err := client.Do(req)

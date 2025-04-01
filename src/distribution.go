@@ -1,9 +1,10 @@
 package main
 
 import (
-	"math"
+	
 )
 
+/*
 func calculate_standard_deviation(float mean, int size, float [30]prices) float64 {
 	sum_square_diffs := 0
 	for _, price := range prices {
@@ -19,3 +20,4 @@ func calculate_mean(arr [30]prices, int size) float64 {
 	}
 	return sum/size
 }
+*/
