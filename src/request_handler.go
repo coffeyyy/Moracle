@@ -11,6 +11,32 @@ import (
 	"github.com/joho/godotenv"
 )
 
+type T = interface{}
+
+type WorkerPool interface {
+	Run()
+	AddTask(task func())
+}
+
+type workerPool struct {
+	numWorkers int
+	queuedTask chan func()
+}
+
+func (wp *workerPool) Run() {
+	for i := 0; i < wp.numWorkers; i++ {
+		go func(workerID int) {
+			for task := range wp.queuedTask {
+				task()
+			}
+		}(i + 1)
+	} 
+}
+
+func (wp *workerPool) AddTask(task func()) {
+	wp.queuedTask <- task
+}
+
 
 func GetCMCPrice() {
 	err := godotenv.Load()
