@@ -23,6 +23,13 @@ type workerPool struct {
 	queuedTask chan func()
 }
 
+func NewWorkerPool(numWorkers int) WorkerPool {
+	return &workerPool {
+		numWorkers: numWorkers,
+		queuedTask: make(chan func(), numWorkers),
+	}
+}
+
 func (wp *workerPool) Run() {
 	for i := 0; i < wp.numWorkers; i++ {
 		go func(workerID int) {
@@ -37,6 +44,7 @@ func (wp *workerPool) AddTask(task func()) {
 	wp.queuedTask <- task
 }
 
+type apiCall func()
 
 func GetCMCPrice() {
 	err := godotenv.Load()
